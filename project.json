@@ -1,0 +1,28 @@
+{
+  "overview": "Tijuana Shop AE is a secure local marketplace for Tijuana, Mexico, where residents and small businesses can buy and sell new or used products. Features real-time chat, Stripe payments, seller analytics, and geolocation map.",
+  "features": [
+    "Buyer-seller chat with real-time polling",
+    "Stripe direct checkout payments in MXN",
+    "Seller analytics dashboard with revenue charts",
+    "Interactive Leaflet map with Tijuana colony filters",
+    "Product listings with zones and categories",
+    "Admin panel with KPI dashboard and moderation",
+    "Avi Bot AI chatbot assistant",
+    "Identity management and user profiles",
+    "Internet Identity authentication"
+  ],
+  "category": "marketplace",
+  "tags": [
+    "marketplace",
+    "tijuana",
+    "ecommerce",
+    "chat",
+    "payments",
+    "stripe",
+    "geolocation",
+    "seller-analytics",
+    "local-commerce",
+    "mexico"
+  ],
+  "last_updated": "2026-04-12T09:27:01.264Z"
+}

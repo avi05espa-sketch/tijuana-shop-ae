@@ -1,0 +1,362 @@
+// Version: 1.0.0
+type ActivityEvent__523671481 =
+  {
+    description : Text;
+    eventType : Text;
+    id : Text;
+    relatedId : ?Text;
+    timestamp : Timestamp__156096896;
+    userId : UserId__752857563
+  };
+type AssetId__504479732 = Text;
+type AuditLog__476823628 =
+  {
+    action : Text;
+    adminId : UserId__288862659;
+    adminName : Text;
+    affectedId : ?Text;
+    details : Text;
+    id : Text;
+    status : Text;
+    timestamp : Timestamp__868508278
+  };
+type ConversationId__147913217 = Text;
+type ConversationStatus__99741713 = {#active; #archived};
+type Conversation__686238356 =
+  {
+    buyerId : UserId__1023572875;
+    createdAt : Timestamp__753029554;
+    id : ConversationId__147913217;
+    lastMessageAt : Timestamp__753029554;
+    productId : Text;
+    sellerId : UserId__1023572875;
+    status : ConversationStatus__99741713
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type MessageId__810287564 = Text;
+type Message__454780518 =
+  {
+    authorId : UserId__1023572875;
+    conversationId : ConversationId__147913217;
+    id : MessageId__810287564;
+    readByBuyer : Bool;
+    readBySeller : Bool;
+    text : Text;
+    timestamp : Timestamp__753029554
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NotificationType__908192046 = {#newMessage; #newProduct; #productUpdate};
+type Notification__264708741 =
+  {
+    body : Text;
+    createdAt : Timestamp__515776233;
+    id : Text;
+    isRead : Bool;
+    notificationType : NotificationType__908192046;
+    relatedId : ?Text;
+    title : Text;
+    userId : UserId__990689167
+  };
+type OrderId__521176343 = Text;
+type OrderStatus__272730104 = {#completed; #failed; #pending; #refunded};
+type Order__141779993 =
+  {
+    amountMxn : Nat;
+    buyerId : UserId__41638867;
+    createdAt : Timestamp__813860109;
+    id : OrderId__521176343;
+    productId : Text;
+    sellerId : UserId__41638867;
+    status : OrderStatus__272730104;
+    stripePaymentIntentId : Text;
+    updatedAt : Timestamp__813860109
+  };
+type ProductCategory__881258261 =
+  {#auto; #electronico; #mueble; #otro; #ropa};
+type ProductCondition__1013877393 = {#nuevo; #usado};
+type ProductStatus__655178360 = {#active; #blocked; #hidden; #paused};
+type ProductViewId__390943383 = Text;
+type ProductView__983601874 =
+  {
+    id : ProductViewId__390943383;
+    productId : Text;
+    timestamp : Timestamp__588042291;
+    viewerId : ?UserId__549335895
+  };
+type ProductZone__65891396 = {#centro; #corredor2000; #otay; #playas};
+type Product__750902660 =
+  {
+    category : ProductCategory__881258261;
+    colony : Text;
+    condition : ProductCondition__1013877393;
+    createdAt : Timestamp__77860887;
+    description : Text;
+    featured : Bool;
+    id : Text;
+    isApartado : Bool;
+    negotiable : Bool;
+    photos : [AssetId__504479732];
+    price : Float;
+    sellerId : UserId__200281261;
+    status : ProductStatus__655178360;
+    title : Text;
+    views : Nat;
+    whatsappContact : ?Text;
+    zone : ProductZone__65891396
+  };
+type Rating__68729563 =
+  {
+    comment : Text;
+    createdAt : Timestamp__1062572612;
+    fromUserId : UserId__861171390;
+    id : Text;
+    productId : Text;
+    score : Nat;
+    toSellerId : UserId__861171390
+  };
+type ReportStatus__445058036 = {#inReview; #new; #resolved};
+type ReportType__121741004 = {#chat; #product; #user};
+type Report__953667835 =
+  {
+    adminNote : ?Text;
+    createdAt : Timestamp__620789394;
+    description : Text;
+    entityId : Text;
+    id : Text;
+    reason : Text;
+    reportType : ReportType__121741004;
+    reporterId : UserId__186832750;
+    status : ReportStatus__445058036
+  };
+type SavedProduct__591928876 =
+  {
+    productId : Text;
+    savedAt : Timestamp__654979425;
+    userId : UserId__312019895
+  };
+type SiteConfig__385932062 = SiteConfig__94319773;
+type SiteConfig__94319773 =
+  {
+    analyticsId : Text;
+    contactEmail : Text;
+    logoUrl : Text;
+    maintenanceMode : Bool;
+    metaDescription : Text;
+    siteDescription : Text;
+    siteName : Text
+  };
+type Timestamp__1062572612 = Timestamp__301639476;
+type Timestamp__156096896 = Timestamp__301639476;
+type Timestamp__301639476 = Int;
+type Timestamp__515776233 = Timestamp__301639476;
+type Timestamp__588042291 = Timestamp__301639476;
+type Timestamp__620789394 = Timestamp__301639476;
+type Timestamp__654979425 = Timestamp__301639476;
+type Timestamp__753029554 = Timestamp__301639476;
+type Timestamp__778030842 = Timestamp__301639476;
+type Timestamp__77860887 = Timestamp__301639476;
+type Timestamp__813860109 = Timestamp__301639476;
+type Timestamp__868508278 = Timestamp__301639476;
+type UserId__1023572875 = UserId__158757552;
+type UserId__1043627770 = UserId__158757552;
+type UserId__158757552 = Text;
+type UserId__186832750 = UserId__158757552;
+type UserId__200281261 = UserId__158757552;
+type UserId__288862659 = UserId__158757552;
+type UserId__312019895 = UserId__158757552;
+type UserId__41638867 = UserId__158757552;
+type UserId__549335895 = UserId__158757552;
+type UserId__752857563 = UserId__158757552;
+type UserId__861171390 = UserId__158757552;
+type UserId__990689167 = UserId__158757552;
+type UserProfile__277265826 =
+  {
+    avatarUrl : ?Text;
+    avgRating : Float;
+    bio : ?Text;
+    createdAt : Timestamp__778030842;
+    currency : Text;
+    dateOfBirth : ?Text;
+    email : ?Text;
+    frequentClients : [UserId__1043627770];
+    id : UserId__1043627770;
+    language : Text;
+    name : Text;
+    notificationsEmail : Bool;
+    notificationsPush : Bool;
+    phone : Text;
+    principal : Principal;
+    privacySearchable : Bool;
+    privacyShowHistory : Bool;
+    role : UserRole__41952412;
+    status : UserStatus__357598751;
+    themePreference : Text;
+    timezone : Text;
+    totalSales : Nat;
+    verified : Bool;
+    zone : ?Text
+  };
+type UserRole__41952412 = {#admin; #comprador; #vendedor};
+type UserStatus__357598751 = {#active; #banned; #suspended};
+actor {
+  stable activityEvents :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ActivityEvent__523671481]];
+      var elementIndex : Nat__490723111
+    };
+  stable auditLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AuditLog__476823628]];
+      var elementIndex : Nat__490723111
+    };
+  stable conversations :
+    {
+      var root :
+        Node__46230540<ConversationId__147913217, Conversation__686238356>;
+      var size : Nat__490723111
+    };
+  stable ic :
+    actor {
+      http_request :
+        shared {
+                 body : ?Blob;
+                 headers : [{name : Text; value : Text}];
+                 is_replicated : ?Bool;
+                 max_response_bytes : ?Nat64;
+                 method : {#get; #head; #post};
+                 transform :
+                   ?{
+                      context : Blob;
+                      function :
+                        shared query {
+                                       context : Blob;
+                                       response :
+                                         {
+                                           body : Blob;
+                                           headers :
+                                             [{name : Text; value : Text}];
+                                           status : Nat
+                                         }
+                                     } ->
+                          async
+                            {
+                              body : Blob;
+                              headers : [{name : Text; value : Text}];
+                              status : Nat
+                            }
+                    };
+                 url : Text
+               } ->
+          async
+            {
+              body : Blob;
+              headers : [{name : Text; value : Text}];
+              status : Nat
+            }
+    };
+  stable icStripe :
+    actor {
+      http_request :
+        shared {
+                 body : ?Blob;
+                 headers : [{name : Text; value : Text}];
+                 is_replicated : ?Bool;
+                 max_response_bytes : ?Nat64;
+                 method : {#get; #head; #post};
+                 transform :
+                   ?{
+                      context : Blob;
+                      function :
+                        shared query {
+                                       context : Blob;
+                                       response :
+                                         {
+                                           body : Blob;
+                                           headers :
+                                             [{name : Text; value : Text}];
+                                           status : Nat
+                                         }
+                                     } ->
+                          async
+                            {
+                              body : Blob;
+                              headers : [{name : Text; value : Text}];
+                              status : Nat
+                            }
+                    };
+                 url : Text
+               } ->
+          async
+            {
+              body : Blob;
+              headers : [{name : Text; value : Text}];
+              status : Nat
+            }
+    };
+  stable messages :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Message__454780518]];
+      var elementIndex : Nat__490723111
+    };
+  stable notifications :
+    {
+      var root : Node__46230540<Text, Notification__264708741>;
+      var size : Nat__490723111
+    };
+  stable orders :
+    {
+      var root : Node__46230540<OrderId__521176343, Order__141779993>;
+      var size : Nat__490723111
+    };
+  stable principalToId :
+    {
+      var root : Node__46230540<Principal, UserId__1043627770>;
+      var size : Nat__490723111
+    };
+  stable productViews :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ProductView__983601874]];
+      var elementIndex : Nat__490723111
+    };
+  stable products :
+    {
+      var root : Node__46230540<Text, Product__750902660>;
+      var size : Nat__490723111
+    };
+  stable ratings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Rating__68729563]];
+      var elementIndex : Nat__490723111
+    };
+  stable reports :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Report__953667835]];
+      var elementIndex : Nat__490723111
+    };
+  stable saved :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?SavedProduct__591928876]];
+      var elementIndex : Nat__490723111
+    };
+  stable var seedDone : {var value : Bool};
+  stable siteConfig : {var value : SiteConfig__385932062};
+  stable users :
+    {
+      var root : Node__46230540<UserId__1043627770, UserProfile__277265826>;
+      var size : Nat__490723111
+    }
+};

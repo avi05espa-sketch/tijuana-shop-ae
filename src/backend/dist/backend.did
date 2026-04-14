@@ -1,0 +1,382 @@
+type UserStatus = 
+ variant {
+   active;
+   banned;
+   suspended;
+ };
+type UserSettings = 
+ record {
+   currency: text;
+   language: text;
+   notificationsEmail: bool;
+   notificationsPush: bool;
+   privacySearchable: bool;
+   privacyShowHistory: bool;
+   themePreference: text;
+   timezone: text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   comprador;
+   vendedor;
+ };
+type UserProfile = 
+ record {
+   avatarUrl: opt text;
+   avgRating: float64;
+   bio: opt text;
+   createdAt: Timestamp;
+   currency: text;
+   dateOfBirth: opt text;
+   email: opt text;
+   frequentClients: vec UserId;
+   id: UserId;
+   language: text;
+   name: text;
+   notificationsEmail: bool;
+   notificationsPush: bool;
+   phone: text;
+   "principal": principal;
+   privacySearchable: bool;
+   privacyShowHistory: bool;
+   role: UserRole;
+   status: UserStatus;
+   themePreference: text;
+   timezone: text;
+   totalSales: nat;
+   verified: bool;
+   zone: opt text;
+ };
+type UserId = text;
+type TopProduct = 
+ record {
+   orders: nat;
+   productId: text;
+   revenue: nat;
+   title: text;
+   views: nat;
+ };
+type Timestamp = int;
+type SiteConfig = 
+ record {
+   analyticsId: text;
+   contactEmail: text;
+   logoUrl: text;
+   maintenanceMode: bool;
+   metaDescription: text;
+   siteDescription: text;
+   siteName: text;
+ };
+type SellerStats = 
+ record {
+   avgOrderValue: nat;
+   conversionRate: float64;
+   revenueByDay: vec RevenueByDay;
+   topProducts: vec TopProduct;
+   totalOrders: nat;
+   totalRevenue: nat;
+ };
+type SavedProduct = 
+ record {
+   productId: text;
+   savedAt: Timestamp;
+   userId: UserId;
+ };
+type RevenueByDay = 
+ record {
+   date: text;
+   revenue: nat;
+ };
+type ReportType = 
+ variant {
+   chat;
+   product;
+   user;
+ };
+type ReportStatus = 
+ variant {
+   inReview;
+   new;
+   resolved;
+ };
+type Report = 
+ record {
+   adminNote: opt text;
+   createdAt: Timestamp;
+   description: text;
+   entityId: text;
+   id: text;
+   reason: text;
+   reportType: ReportType;
+   reporterId: UserId;
+   status: ReportStatus;
+ };
+type Rating = 
+ record {
+   comment: text;
+   createdAt: Timestamp;
+   fromUserId: UserId;
+   id: text;
+   productId: text;
+   score: nat;
+   toSellerId: UserId;
+ };
+type ProductZone = 
+ variant {
+   centro;
+   corredor2000;
+   otay;
+   playas;
+ };
+type ProductStatus = 
+ variant {
+   active;
+   blocked;
+   hidden;
+   paused;
+ };
+type ProductFilters = 
+ record {
+   category: opt ProductCategory;
+   condition: opt ProductCondition;
+   priceMax: opt float64;
+   priceMin: opt float64;
+   searchTerm: opt text;
+   status: opt ProductStatus;
+   zone: opt ProductZone;
+ };
+type ProductCondition = 
+ variant {
+   nuevo;
+   usado;
+ };
+type ProductCategory = 
+ variant {
+   auto;
+   electronico;
+   mueble;
+   otro;
+   ropa;
+ };
+type Product = 
+ record {
+   category: ProductCategory;
+   colony: text;
+   condition: ProductCondition;
+   createdAt: Timestamp;
+   description: text;
+   featured: bool;
+   id: text;
+   isApartado: bool;
+   negotiable: bool;
+   photos: vec AssetId;
+   price: float64;
+   sellerId: UserId;
+   status: ProductStatus;
+   title: text;
+   views: nat;
+   whatsappContact: opt text;
+   zone: ProductZone;
+ };
+type OrderStatus = 
+ variant {
+   completed;
+   failed;
+   pending;
+   refunded;
+ };
+type OrderStats = 
+ record {
+   ordersThisMonth: nat;
+   ordersThisWeek: nat;
+   ordersToday: nat;
+   totalOrders: nat;
+   totalRevenue: nat;
+ };
+type OrderId = text;
+type Order = 
+ record {
+   amountMxn: nat;
+   buyerId: UserId;
+   createdAt: Timestamp;
+   id: OrderId;
+   productId: text;
+   sellerId: UserId;
+   status: OrderStatus;
+   stripePaymentIntentId: text;
+   updatedAt: Timestamp;
+ };
+type NotificationType = 
+ variant {
+   newMessage;
+   newProduct;
+   productUpdate;
+ };
+type Notification = 
+ record {
+   body: text;
+   createdAt: Timestamp;
+   id: text;
+   isRead: bool;
+   notificationType: NotificationType;
+   relatedId: opt text;
+   title: text;
+   userId: UserId;
+ };
+type MessageId = text;
+type Message = 
+ record {
+   authorId: UserId;
+   conversationId: ConversationId;
+   id: MessageId;
+   readByBuyer: bool;
+   readBySeller: bool;
+   "text": text;
+   timestamp: Timestamp;
+ };
+type DashboardStats = 
+ record {
+   activeListings: nat;
+   blockedProducts: nat;
+   newProductsToday: nat;
+   newUsersToday: nat;
+   pendingReports: nat;
+   totalProducts: nat;
+   totalReports: nat;
+   totalUsers: nat;
+ };
+type ConversationStatus = 
+ variant {
+   active;
+   archived;
+ };
+type ConversationId = text;
+type Conversation = 
+ record {
+   buyerId: UserId;
+   createdAt: Timestamp;
+   id: ConversationId;
+   lastMessageAt: Timestamp;
+   productId: text;
+   sellerId: UserId;
+   status: ConversationStatus;
+ };
+type ChatMessage = 
+ record {
+   content: text;
+   role: text;
+ };
+type AuditLog = 
+ record {
+   action: text;
+   adminId: UserId;
+   adminName: text;
+   affectedId: opt text;
+   details: text;
+   id: text;
+   status: text;
+   timestamp: Timestamp;
+ };
+type AuditFilters = 
+ record {
+   actionType: opt text;
+   adminId: opt UserId;
+   fromDate: opt Timestamp;
+   page: nat;
+   pageSize: nat;
+   toDate: opt Timestamp;
+ };
+type AssetId = text;
+type ActivityEvent = 
+ record {
+   description: text;
+   eventType: text;
+   id: text;
+   relatedId: opt text;
+   timestamp: Timestamp;
+   userId: UserId;
+ };
+service : {
+  addAdminNote: (reportId: text, note: text) -> (Report);
+  addFrequentClient: (sellerId: UserId) -> (UserProfile);
+  addRating: (toSellerId: UserId, productId: text, score: nat, comment:
+   text) -> (Rating);
+  chatWithAviBot: (message: text, conversationHistory: vec ChatMessage) ->
+   (text);
+  createCheckoutSession: (productId: text, successUrl: text, cancelUrl:
+   text) -> (record {checkoutUrl: text;});
+  createConversation: (sellerId: UserId, productId: text) -> (Conversation);
+  createOrder: (productId: text, sellerId: UserId, amountMxn: nat,
+   stripePaymentIntentId: text) -> (Order);
+  createProduct: (title: text, description: text, price: float64, negotiable:
+   bool, category: ProductCategory, condition: ProductCondition, zone:
+   ProductZone, colony: text, photos: vec text, whatsappContact: opt text,
+   isApartado: bool) -> (Product);
+  createReport: (reportType: ReportType, entityId: text, reason: text,
+   description: text) -> (Report);
+  deleteProduct: (productId: text) -> ();
+  deleteUser: (targetId: UserId) -> ();
+  featureProduct: (productId: text, featured: bool) -> (Product);
+  getActivityByUser: (userId: UserId) -> (vec ActivityEvent) query;
+  getConfig: () -> (SiteConfig) query;
+  getConversationMessages: (conversationId: ConversationId) ->
+   (vec Message) query;
+  getDashboardStats: () -> (DashboardStats) query;
+  getMyActivity: () -> (vec ActivityEvent) query;
+  getMyConversations: () -> (vec Conversation) query;
+  getMyNotifications: () -> (vec Notification) query;
+  getMyOrders: () -> (vec Order) query;
+  getMyProfile: () -> (opt UserProfile) query;
+  getMyRatings: () -> (vec Rating) query;
+  getMySavedProducts: () -> (vec SavedProduct) query;
+  getMySellerOrders: () -> (vec Order) query;
+  getProduct: (productId: text) -> (opt Product) query;
+  getProductPhotoIds: (productId: text) -> (vec text) query;
+  getProductViewCount: (productId: text) -> (nat) query;
+  getProductsByVendor: (sellerId: UserId) -> (vec Product) query;
+  getRatingsBySeller: (sellerId: UserId) -> (vec Rating) query;
+  getSellerOrderStats: () -> (OrderStats) query;
+  getSellerStats: () -> (SellerStats) query;
+  getUnreadCount: () -> (nat) query;
+  getUnreadNotificationCount: () -> (nat) query;
+  getUserById: (userId: UserId) -> (opt UserProfile) query;
+  incrementProductViews: (productId: text) -> ();
+  isMaintenanceMode: () -> (bool) query;
+  listAuditLogs: (filters: AuditFilters) -> (vec AuditLog) query;
+  listMyActivity: () -> (vec ActivityEvent) query;
+  listProducts: (filters: ProductFilters) -> (vec Product) query;
+  listReports: () -> (vec Report) query;
+  listUsers: () -> (vec UserProfile) query;
+  markAllNotificationsRead: () -> ();
+  markConversationAsRead: (conversationId: ConversationId) -> ();
+  markNotificationRead: (notifId: text) -> ();
+  registerUser: (name: text, phone: text, email: opt text, avatarUrl:
+   opt text, bio: opt text, zone: opt text, role: UserRole) -> (UserProfile);
+  removeFrequentClient: (sellerId: UserId) -> (UserProfile);
+  saveProduct: (productId: text) -> (SavedProduct);
+  seedSampleData: () -> (nat);
+  sendMessage: (conversationId: ConversationId, "text": text) -> (Message);
+  trackProductView: (productId: text) -> ();
+  unsaveProduct: (productId: text) -> ();
+  updateConfig: (siteName: opt text, siteDescription: opt text, logoUrl:
+   opt text, contactEmail: opt text, maintenanceMode: opt bool, analyticsId:
+   opt text, metaDescription: opt text) -> (SiteConfig);
+  updateOrderStatus: (orderId: OrderId, status: OrderStatus) -> (Order);
+  updateProduct: (productId: text, title: opt text, description: opt text,
+   price: opt float64, negotiable: opt bool, category: opt ProductCategory,
+   condition: opt ProductCondition, zone: opt ProductZone, colony: opt text,
+   photos: opt vec text, whatsappContact: opt text, isApartado: opt bool) ->
+   (Product);
+  updateProductStatus: (productId: text, status: ProductStatus) -> (Product);
+  updateProfile: (name: opt text, email: opt text, avatarUrl: opt text, bio:
+   opt text, zone: opt text, dateOfBirth: opt text, privacySearchable:
+   opt bool, privacyShowHistory: opt bool, themePreference: opt text,
+   language: opt text, timezone: opt text, currency: opt text,
+   notificationsEmail: opt bool, notificationsPush: opt bool) ->
+   (UserProfile);
+  updateReportStatus: (reportId: text, status: ReportStatus) -> (Report);
+  updateSettings: (settings: UserSettings) -> (UserProfile);
+  updateUserStatus: (targetId: UserId, status: UserStatus) -> (UserProfile);
+  verifyUser: (targetId: UserId) -> (UserProfile);
+}
